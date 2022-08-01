@@ -136,6 +136,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+
 }
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -151,55 +155,12 @@ SWAGGER_SETTINGS = {
     'JSON_EDITOR': True,
 }
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters': {
-#         'verbose': {
-#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-#             'style': '{',
-#         },
-#         'simple': {
-#             'format': '{levelname} {message}',
-#             'style': '{',
-#         },
-#     },
-#     'filters': {
-#         'special': {
-#             '()': 'project.logging.SpecialFilter',
-#             'foo': 'bar',
-#         },
-#         'require_debug_true': {
-#             '()': 'django.utils.log.RequireDebugTrue',
-#         },
-#     },
-#     'handlers': {
-#         'console': {
-#             'level': 'INFO',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'simple'
-#         },
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'class': 'django.utils.log.AdminEmailHandler',
-#             'filters': ['special']
-#         }
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['console'],
-#             'propagate': True,
-#         },
-#         'django.request': {
-#             'handlers': ['mail_admins'],
-#             'level': 'ERROR',
-#             'propagate': False,
-#         },
-#         'myproject.custom': {
-#             'handlers': ['console', 'mail_admins'],
-#             'level': 'INFO',
-#             'filters': ['special']
-#         }
-#     }
-# }
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
