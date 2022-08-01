@@ -50,10 +50,10 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    def has_perm(self):
+    def has_perm(self, perm, obj=None):
         return self.is_superuser
 
-    def has_module_perms(self):
+    def has_module_perms(self, app_label):
         return self.is_superuser
 
     def __str__(self):
