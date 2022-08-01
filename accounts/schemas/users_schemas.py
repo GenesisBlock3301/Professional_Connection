@@ -1,4 +1,6 @@
 from drf_yasg import openapi
+from rest_framework import status
+
 
 signup_request_schema_body = openapi.Schema(
     name='body',
@@ -10,6 +12,7 @@ signup_request_schema_body = openapi.Schema(
         "password2": openapi.Schema(type=openapi.TYPE_STRING),
     }
 )
+
 
 signup_response_schema_body = {
     "200": openapi.Response(
@@ -23,5 +26,20 @@ signup_response_schema_body = {
                 "status": openapi.Schema(type=openapi.TYPE_STRING)
             }
         )
+    )
+}
+
+
+user_response_schema_body = {
+    status.HTTP_200_OK : openapi.Schema(
+        name='body',
+        description="User Response Schema",
+        type=openapi.TYPE_OBJECT,
+        properties={
+            "email": openapi.Schema(type=openapi.TYPE_STRING),
+            "first_name": openapi.Schema(type=openapi.TYPE_STRING),
+            "last_name": openapi.Schema(type=openapi.TYPE_STRING),
+            "password": openapi.Schema(type=openapi.TYPE_STRING),
+        }
     )
 }
