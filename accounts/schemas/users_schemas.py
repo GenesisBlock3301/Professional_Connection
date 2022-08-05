@@ -43,3 +43,12 @@ user_response_schema_body = {
         }
     )
 }
+
+logout_request_schema_body = openapi.Schema(
+    name='body',
+    description="Logout Request Schema",
+    type=openapi.TYPE_OBJECT,
+    properties={
+        "refresh_token": openapi.Schema(type=openapi.TYPE_STRING)
+    }
+)
