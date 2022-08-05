@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, OutstandingToken, BlacklistedToken
 from rest_framework import permissions
+from rest_framework_simplejwt.tokens import RefreshToken, OutstandingToken, BlacklistedToken
 from rest_framework import status
 from .serializers import UserSerializer
 from .schemas.users_schemas import signup_request_schema_body, signup_response_schema_body, user_response_schema_body, \

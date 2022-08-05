@@ -147,14 +147,13 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 from datetime import timedelta
 
-from datetime import timedelta
-
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=12),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=3),
-    'SIGNING_KEY': SECRET_KEY,
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=50),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+SWAGGER_SETTINGS = {
+    'JSON_EDITOR': True,
 }
 
 SWAGGER_SETTINGS = {
