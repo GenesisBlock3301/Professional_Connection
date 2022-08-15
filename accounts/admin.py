@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounts.models.users import User
+from accounts.models.users import User, Profile
 from accounts.models.connection import Connection
 from accounts.models.Featured import Featured
 
@@ -7,7 +7,14 @@ from accounts.models.Featured import Featured
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = (
-        "id", "email", "first_name", "last_name"
+        "id", "email"
+    )
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        "id", "first_name", "last_name"
     )
 
 

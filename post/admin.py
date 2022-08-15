@@ -5,7 +5,7 @@ from . models import Post, PostLike, Comment, CommentLike, Tag
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = (
-        "id", "author_company", "author_user", "text"
+        "id", "company", "user", "text"
     )
 
 
