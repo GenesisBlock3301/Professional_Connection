@@ -62,7 +62,7 @@ class User(AbstractBaseUser):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_profiles")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profiles")
     first_name = models.CharField(_("First Name"), max_length=255, null=True, blank=True)
     last_name = models.CharField(_("Last Name"), max_length=255, null=True, blank=True)
     image = models.ImageField(upload_to="user_photo", null=True, blank=True)

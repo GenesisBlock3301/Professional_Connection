@@ -1,0 +1,26 @@
+[
+  {
+    "model": "accounts.featured",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "documents": "/home/bs815/Desktop/Professional_Connection/test.jpg"
+    }
+  },
+  {
+    "model": "accounts.featured",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "documents": "/home/bs815/Desktop/Professional_Connection/test.jpg"
+    }
+  },
+  {
+    "model": "accounts.featured",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "documents": "/home/bs815/Desktop/Professional_Connection/test.jpg"
+    }
+  }
+]

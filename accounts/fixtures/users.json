@@ -22,5 +22,21 @@
       "email": "nas3@gmail.com",
       "password": "nas12345"
     }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+      "email": "nas4@gmail.com",
+      "password": "nas12345"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+      "email": "nas5@gmail.com",
+      "password": "nas12345"
+    }
   }
 ]
