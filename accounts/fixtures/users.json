@@ -1,0 +1,42 @@
+[
+  {
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+      "email": "nas1@gmail.com",
+      "password": "nas12345"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+      "email": "nas2@gmail.com",
+      "password": "nas12345"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+      "email": "nas3@gmail.com",
+      "password": "nas12345"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+      "email": "nas4@gmail.com",
+      "password": "nas12345"
+    }
+  },
+  {
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+      "email": "nas5@gmail.com",
+      "password": "nas12345"
+    }
+  }
+]

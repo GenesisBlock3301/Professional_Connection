@@ -7,5 +7,5 @@ class Featured(models.Model):
     documents = models.FileField(upload_to="featured_photos")
 
     def __str__(self):
-        return f"{self.user.first_name}+ {self.user.last_name} featured"
+        return f"user {self.user_id} featured"
 

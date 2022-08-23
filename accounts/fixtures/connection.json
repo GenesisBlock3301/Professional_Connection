@@ -1,0 +1,26 @@
+[
+  {
+    "model": "accounts.connection",
+    "pk": 1,
+    "fields": {
+      "user1": 2,
+      "user2": 3
+    }
+  },
+  {
+    "model": "accounts.connection",
+    "pk": 2,
+    "fields": {
+      "user1": 2,
+      "user2": 4
+    }
+  },
+  {
+    "model": "accounts.connection",
+    "pk": 3,
+    "fields": {
+      "user1": 3,
+      "user2": 4
+    }
+  }
+]

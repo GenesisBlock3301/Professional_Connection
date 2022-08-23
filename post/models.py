@@ -5,15 +5,15 @@ from accounts.models.users import User
 
 class Common(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
 
 
 class Post(Common):
-    author_company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="author_company_post", null=True)
-    author_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author_users")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="author_company_posts")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author_user_posts")
     text = models.TextField()
 
     def __str__(self):
@@ -30,7 +30,7 @@ class Comment(Common):
 
 
 class PostLike(Common):
-    user = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="user_like")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_like")
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_like")
 
     def __str__(self):
@@ -38,7 +38,7 @@ class PostLike(Common):
 
 
 class CommentLike(Common):
-    user = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="user_comment_like")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comment_like")
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="comment_like")
 
     def __str__(self):

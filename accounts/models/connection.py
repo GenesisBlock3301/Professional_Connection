@@ -9,8 +9,3 @@ class Connection(models.Model):
 
     def __str__(self):
         return f"{self.user1.first_name} and {self.user2.last_name}"
-
-    def save(self, *args, **kwargs):
-        if self.user1 == self.user2:
-            raise ValidationError("user1 and user2 can't be same.")
-        super().save(*args, **kwargs)
