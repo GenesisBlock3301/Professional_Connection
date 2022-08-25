@@ -1,0 +1,25 @@
+[
+  {
+    "model": "company.experience",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "title": "Python Developer",
+      "company": 1,
+      "position": "Associate Software Engineer",
+      "start": "2021-10-25",
+      "end": "2022-01-25"
+    }
+  },
+  {
+    "model": "company.experience",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "title": "Python Developer",
+      "company": 1,
+      "position": "Associate Software Engineer",
+      "start": "2022-02-01"
+    }
+  }
+]

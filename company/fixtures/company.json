@@ -1,0 +1,24 @@
+[
+  {
+    "model": "company.company",
+    "pk": 1,
+    "fields": {
+      "manager": 2,
+      "city": "Dhaka",
+      "photo": "/home/bs815/Desktop/Professional_Connection/test.jpg",
+      "industry": "IT",
+      "name": "BS-23"
+    }
+  },
+  {
+    "model": "company.company",
+    "pk": 2,
+    "fields": {
+      "manager": 3,
+      "city": "Dhaka",
+      "photo": "/home/bs815/Desktop/Professional_Connection/test.jpg",
+      "industry": "IT",
+      "name": "Enonsis"
+    }
+  }
+]

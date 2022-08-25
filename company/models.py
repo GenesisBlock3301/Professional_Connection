@@ -34,7 +34,7 @@ class Experience(models.Model):
     title = models.CharField(max_length=255)
     employment_type = models.CharField(max_length=50, choices=EMPLOYEE_TYPE)
     start = models.DateField()
-    end = models.DateField()
+    end = models.DateField(null=True)
     position = models.CharField(max_length=255)
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="company_experiences")
 
