@@ -1,6 +1,6 @@
 [
   {
-    "model": "company.comment",
+    "model": "post.comment",
     "pk": 1,
     "fields": {
       "author": 1,
@@ -11,7 +11,7 @@
     }
   },
   {
-    "model": "company.comment",
+    "model": "post.comment",
     "pk": 2,
     "fields": {
       "author": 2,
@@ -22,7 +22,7 @@
     }
   },
   {
-    "model": "company.comment",
+    "model": "post.comment",
     "pk": 3,
     "fields": {
       "author": 2,
@@ -33,7 +33,7 @@
     }
   },
   {
-    "model": "company.comment",
+    "model": "post.comment",
     "pk": 4,
     "fields": {
       "author": 3,
@@ -44,7 +44,7 @@
     }
   },
   {
-    "model": "company.comment",
+    "model": "post.comment",
     "pk": 5,
     "fields": {
       "author": 2,
@@ -55,7 +55,7 @@
     }
   },
   {
-    "model": "company.comment",
+    "model": "post.comment",
     "pk": 6,
     "fields": {
       "author": 1,

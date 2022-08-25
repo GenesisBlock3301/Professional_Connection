@@ -1,6 +1,6 @@
 [
   {
-    "model": "company.postlike",
+    "model": "post.postlike",
     "pk": 1,
     "fields": {
       "user": 3,
@@ -10,7 +10,7 @@
     }
   },
   {
-    "model": "company.postlike",
+    "model": "post.postlike",
     "pk": 2,
     "fields": {
       "user": 2,
@@ -20,7 +20,7 @@
     }
   },
    {
-    "model": "company.postlike",
+    "model": "post.postlike",
     "pk": 3,
     "fields": {
       "user": 2,
@@ -30,8 +30,8 @@
     }
   },
    {
-    "model": "company.postlike",
-    "pk": 2,
+    "model": "post.postlike",
+    "pk": 4,
     "fields": {
       "user": 3,
       "post": 2,
