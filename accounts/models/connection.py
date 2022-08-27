@@ -24,3 +24,6 @@ class Follower(models.Model):
         if self.user == self.follower:
             return ValidationError("User can't follow self.")
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user_id} - {self.follower_id}"

@@ -70,3 +70,13 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_notification")
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user_id} {self.message[:50]}.."

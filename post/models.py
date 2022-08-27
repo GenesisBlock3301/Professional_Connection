@@ -1,6 +1,7 @@
 from django.db import models
 from company.models import Company
 from accounts.models.users import User
+from .custom_managers import PostManager
 
 
 class Common(models.Model):
@@ -16,8 +17,10 @@ class Post(Common):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author_user_posts")
     text = models.TextField()
 
+    objects = PostManager()
+
     def __str__(self):
-        return f"{self.text[:100]}..."
+        return f"{self.id}"
 
 
 class Comment(Common):
@@ -26,7 +29,7 @@ class Comment(Common):
     text = models.TextField()
 
     def __str__(self):
-        return f"{self.text[:100]}..."
+        return f"{self.post_id}'s comment"
 
 
 class PostLike(Common):
@@ -34,7 +37,7 @@ class PostLike(Common):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_like")
 
     def __str__(self):
-        return f"{self.post_id} post like"
+        return f"{self.post_id}'s like"
 
 
 class CommentLike(Common):
