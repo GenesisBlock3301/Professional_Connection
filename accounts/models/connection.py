@@ -4,8 +4,8 @@ from django.core.exceptions import ValidationError
 
 
 class Connection(models.Model):
-    user1 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="user1_connections")
-    user2 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="user2_connections")
+    user1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user1_connections")
+    user2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user2_connections")
 
     def save(self, *args, **kwargs):
         if self.user1 == self.user2:
