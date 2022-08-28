@@ -22,5 +22,13 @@
       "user1": 3,
       "user2": 4
     }
+  },
+  {
+    "model": "accounts.connection",
+    "pk": 4,
+    "fields": {
+      "user1": 2,
+      "user2": 4
+    }
   }
 ]

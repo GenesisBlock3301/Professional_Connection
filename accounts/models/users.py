@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Count
 
 
 class UserManager(BaseUserManager):
@@ -33,6 +34,15 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(self._db)
         return user
+
+    def get_queryset(self):
+        return super().get_queryset().annotate(num_of_connection=Count("user1_connections")).all()
+
+    def num_of_connections(self, _id):
+        return self.filter(id=_id).annotate(num_of_connection=Count("user1_connections")).first()
+
+    def user_notifications(self, _id):
+        self.filter(id=_id).annotate(num_of_notifications=Count("user1_connections")).first()
 
 
 class User(AbstractBaseUser):

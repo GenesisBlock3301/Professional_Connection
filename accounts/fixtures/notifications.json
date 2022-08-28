@@ -1,0 +1,22 @@
+[
+  {
+    "model": "accounts.Notification",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "message": "message 1",
+      "is_read": false,
+      "created": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "accounts.Notification",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "message": "message 2",
+      "is_read": false,
+      "created": "2021-10-25 14:30:59"
+    }
+  }
+]
