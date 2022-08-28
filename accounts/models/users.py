@@ -38,12 +38,6 @@ class UserManager(BaseUserManager):
     def get_queryset(self):
         return super().get_queryset().annotate(num_of_connection=Count("user1_connections")).all()
 
-    def num_of_connections(self, _id):
-        return self.filter(id=_id).annotate(num_of_connection=Count("user1_connections")).first()
-
-    def user_notifications(self, _id):
-        self.filter(id=_id).annotate(num_of_notifications=Count("user1_connections")).first()
-
 
 class User(AbstractBaseUser):
     """Custom user model"""

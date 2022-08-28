@@ -22,6 +22,8 @@ class Connection(models.Model):
 class Follower(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if self.user == self.follower:
