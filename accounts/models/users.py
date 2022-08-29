@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Count
+from datetime import date
+from datetime import date, timedelta
 
 
 class UserManager(BaseUserManager):
@@ -84,3 +86,15 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"{self.user_id} {self.message[:50]}.."
+
+
+class ContactInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_contract")
+    profile_link = models.CharField(max_length=1000, null=True)
+    website = models.CharField(max_length=255, null=True)
+    phone = models.CharField(max_length=16, null=True)
+    email = models.CharField(max_length=100, null=True)
+    birthdate = models.DateField(null=True, max_length=8)
+
+    def calculate_age(self):
+        return (date.today() - self.birthdate) // timedelta(days=365.2425)
