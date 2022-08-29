@@ -24,8 +24,8 @@ class Post(Common):
 
 
 class Comment(Common):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author_comment")
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_comment")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author_comments")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_comments")
     text = models.TextField()
 
     def __str__(self):
@@ -33,16 +33,16 @@ class Comment(Common):
 
 
 class PostLike(Common):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_like")
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_like")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_likes")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_likes")
 
     def __str__(self):
         return f"{self.post_id}'s like"
 
 
 class CommentLike(Common):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comment_like")
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="comment_like")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comment_likes")
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="comment_likes")
 
     def __str__(self):
         return f"{self.comment_id} comment like"
