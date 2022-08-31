@@ -8,9 +8,9 @@ class PostManager(models.Manager):
         return super().get_queryset().select_related("user", "company")
 
     def num_of_comments(self, _id: int) -> QuerySet:
-        return self.select_related("user", "company").prefetch_related("post_comment", "post_like")\
+        return self.select_related("user", "company")\
             .filter(id=_id).annotate(num_of_comments=Count("post_comment")).first()
 
     def num_of_likes(self, _id: int) -> QuerySet:
-        return self.select_related("user", "company").prefetch_related("post_comment", "post_like") \
+        return self.select_related("user", "company") \
             .filter(id=_id).annotate(num_of_comments=Count("post_like")).first()
