@@ -5,7 +5,7 @@ from django.db import models
 
 class PostManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().select_related("user", "company").prefetch_related("post_comment", "post_like")
+        return super().get_queryset().select_related("user", "company")
 
     def num_of_comments(self, _id: int) -> QuerySet:
         return self.select_related("user", "company").prefetch_related("post_comment", "post_like")\

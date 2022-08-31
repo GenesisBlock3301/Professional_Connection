@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models.users import User
-from post.models import Common
+from common.models import Common
+from common.models import PostCommon, PostLikeCommon, CommentLikeCommon, PostCommentCommon, CommonUserField
 
 
 class Group(Common):
@@ -19,12 +20,11 @@ class Group(Common):
         return self.group_name
 
 
-class GroupMember(Common):
+class GroupMember(CommonUserField):
     ROLE_TYPE = (
         ("admin", "Admin"),
         ("general", "General")
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_groups")
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="group_members")
     role = models.CharField(choices=ROLE_TYPE, max_length=20, null=True)
 
@@ -32,34 +32,28 @@ class GroupMember(Common):
         return f"{self.group.id}"
 
 
-class GroupPost(Common):
+class GroupPost(PostCommon):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="group_member")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_group_post")
-    text = models.TextField()
 
     def __str__(self):
         return f"{self.group_id} post"
 
 
-class GroupPostComment(Common):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author_group_comment")
+class GroupPostComment(PostCommentCommon):
     group_post = models.ForeignKey(GroupPost, on_delete=models.CASCADE, related_name="post_comment")
-    text = models.TextField()
 
     def __str__(self):
         return f"{self.group_post_id}'s comment"
 
 
-class GroupPostLike(Common):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_gp_like")
+class GroupPostLike(PostLikeCommon):
     group_post = models.ForeignKey(GroupPost, on_delete=models.CASCADE, related_name="gp_like")
 
     def __str__(self):
         return f"{self.group_post_id}'s like"
 
 
-class GroupPostCommentLike(Common):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_gp_comment_like")
+class GroupPostCommentLike(CommentLikeCommon):
     group_comment = models.ForeignKey(GroupPostComment, on_delete=models.CASCADE, related_name="gp_comment_like")
 
     def __str__(self):
