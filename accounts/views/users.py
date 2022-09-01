@@ -3,9 +3,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework import status
-from .serializers import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from accounts.serializers.users import ProfileSerializer, UserSerializer
+import logging
+from accounts.responses import POST_ERROR_RESPONSE, POST_SUCCESS_RESPONSE, POST_EXCEPTION_ERROR_RESPONSE,\
+    GET_DATA_FROM_SERIALIZER
+from accounts.models.users import Profile
+
 User = get_user_model()
+logger = logging.getLogger(__name__)
 
 
 class SignupView(APIView):
@@ -25,9 +31,29 @@ class SignupView(APIView):
                 else:
                     user = User.objects.create_user(email=email, password=password)
                     user.save()
-                    return Response({"code": status.HTTP_200_OK, "status": "User created successfully"})
+                    return Response(POST_SUCCESS_RESPONSE)
         else:
-            return Response({'error': "Password not match"})
+            return Response(POST_ERROR_RESPONSE)
+
+
+class ProfileApiView(APIView):
+
+    def post(self, request):
+        try:
+            data = request.data
+            serializer = ProfileSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(POST_SUCCESS_RESPONSE)
+            return Response(POST_ERROR_RESPONSE)
+        except Exception as e:
+            logger.error(str(e), exc_info=True)
+            return Response(POST_EXCEPTION_ERROR_RESPONSE)
+
+    def get(self, request):
+        profile = Profile.objects.select_related("user").filter(user=request.user).first()
+        serializer = ProfileSerializer(profile)
+        return Response(GET_DATA_FROM_SERIALIZER(serializer))
 
 
 class LogoutView(APIView):
@@ -40,7 +66,7 @@ class LogoutView(APIView):
             token.blacklist()
             return Response({"status": "Successfully logout"},
                             status=status.HTTP_205_RESET_CONTENT)
-        except Exception  as e:
+        except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
