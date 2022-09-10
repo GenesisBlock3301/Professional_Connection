@@ -1,6 +1,5 @@
 from accounts.models.users import Profile
-from django.db.models import Count, Q
-from accounts.models.Featured import Featured
+from django.db.models import Q
 from accounts.models.connection import Connection, Follower
 from rest_framework.response import Response
 from accounts.responses import ELEMENT_NOT_EXIST

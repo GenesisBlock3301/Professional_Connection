@@ -1,0 +1,57 @@
+[
+  {
+    "model": "group.GroupMember",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "group": 1,
+      "role": "general",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupMember",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "group": 2,
+      "role": "general",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupMember",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "group": 1,
+      "role": "general",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupMember",
+    "pk": 4,
+    "fields": {
+      "user": 1,
+      "group": 1,
+      "role": "general",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupMember",
+    "pk": 5,
+    "fields": {
+      "user": 1,
+      "group": 4,
+      "role": "general",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  }
+]

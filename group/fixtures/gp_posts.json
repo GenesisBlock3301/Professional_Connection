@@ -1,0 +1,46 @@
+[
+  {
+    "model": "group.GroupPost",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "group": 1,
+      "text": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupPost",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "group": 2,
+      "text": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupPost",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "group": 1,
+      "text": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupPost",
+    "pk": 4,
+    "fields": {
+      "user": 3,
+      "group": 1,
+      "text": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  }
+]

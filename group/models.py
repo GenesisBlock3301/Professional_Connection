@@ -29,7 +29,7 @@ class GroupMember(CommonUserField):
     role = models.CharField(choices=ROLE_TYPE, max_length=20, null=True)
 
     def __str__(self):
-        return f"{self.group.id}"
+        return f"{self.group_id}"
 
 
 class GroupPost(PostCommon):
