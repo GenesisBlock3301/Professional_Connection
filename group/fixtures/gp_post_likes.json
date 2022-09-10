@@ -1,0 +1,62 @@
+[
+  {
+    "model": "group.GroupPostLike",
+    "pk": 1,
+    "fields": {
+      "user": 3,
+      "group_post": 1,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupPostLike",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "group_post": 1,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+   {
+    "model": "group.GroupPostLike",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "group_post": 1,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+   {
+    "model": "group.GroupPostLike",
+    "pk": 4,
+    "fields": {
+      "user": 3,
+      "group_post": 2,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupPostLike",
+    "pk": 5,
+    "fields": {
+      "user": 3,
+      "group_post": 4,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.GroupPostLike",
+    "pk": 6,
+    "fields": {
+      "user": 3,
+      "group_post": 2,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  }
+]

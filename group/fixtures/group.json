@@ -1,0 +1,75 @@
+[
+  {
+    "model": "group.Group",
+    "pk": 1,
+    "fields": {
+      "group_type": "group_type_1",
+      "group_name": "Group name 1",
+      "description": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "cover_image": null,
+      "group_photo": null,
+      "industry": "Software Firm",
+      "location": "Dhaka, Bangladesh",
+      "group_roles": "group roles",
+      "is_public": true,
+      "allow_connection": true,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.Group",
+    "pk": 2,
+    "fields": {
+      "group_type": "group_type_2",
+      "group_name": "Group name 2",
+      "description": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "cover_image": null,
+      "group_photo": null,
+      "industry": "Software Firm",
+      "location": "Dhaka, Bangladesh",
+      "group_roles": "group roles",
+      "is_public": true,
+      "allow_connection": true,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.Group",
+    "pk": 3,
+    "fields": {
+      "group_type": "group_type_3",
+      "group_name": "Group name 3",
+      "description": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "cover_image": null,
+      "group_photo": null,
+      "industry": "Software Firm",
+      "location": "Dhaka, Bangladesh",
+      "group_roles": "group roles",
+      "is_public": true,
+      "allow_connection": true,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  },
+  {
+    "model": "group.Group",
+    "pk": 4,
+    "fields": {
+      "group_type": "group_type_4",
+      "group_name": "Group name 4",
+      "description": "The online encyclopedia project, Wikipedia, is the most popular wiki-based website, and is one of the most widely viewed sites in the world, having been ranked ",
+      "cover_image": null,
+      "group_photo": null,
+      "industry": "Software Firm",
+      "location": "Dhaka, Bangladesh",
+      "group_roles": "group roles",
+      "is_public": true,
+      "allow_connection": true,
+      "created_at": "2021-10-25 14:30:59",
+      "updated_at": "2021-10-25 14:30:59"
+    }
+  }
+
+]

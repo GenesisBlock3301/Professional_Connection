@@ -2,8 +2,7 @@ from django.db import models
 from company.models import Company
 from accounts.models.users import User
 from .custom_managers import PostManager
-from common.models import PostCommon, PostCommentCommon, PostLikeCommon, Common,\
-    CommentLikeCommon
+from common.models import PostCommon, PostCommentCommon, PostLikeCommon, Common, CommentLikeCommon
 
 
 class Post(PostCommon):

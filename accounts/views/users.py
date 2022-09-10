@@ -7,7 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.serializers.users import ProfileSerializer, UserSerializer, CreateProfileSerializer
 import logging
 from accounts.responses import POST_ERROR_RESPONSE, POST_SUCCESS_RESPONSE, POST_EXCEPTION_ERROR_RESPONSE,\
-    GET_DATA_FROM_SERIALIZER, ELEMENT_NOT_EXIST
+    GET_DATA_FROM_SERIALIZER
 from accounts.models.users import Profile
 from accounts.helper import ProfileHelper
 
@@ -77,6 +77,7 @@ class LogoutView(APIView):
             return Response({"status": "Successfully logout"},
                             status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
+            logger.error(str(e), exc_info=True)
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
