@@ -1,14 +1,16 @@
 from rest_framework import pagination
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
+from collections import OrderedDict
 
 
-class CustomPagination(pagination.PageNumberPagination):
-    def get_paginated_response(self, data):
-        return Response({
-            'links': {
-                'next': self.get_next_link(),
-                'previous': self.get_previous_link()
-            },
-            'count': self.page.paginator.count,
-            'results': data
-        })
+class CustomPagination:
+    def __init__(self):
+        self.paginator = PageNumberPagination()
+
+    def get_queryset(self, data, request):
+        result_page = self.paginator.paginate_queryset(queryset=data, request=request)
+        return result_page
+
+    def get_response(self, serialized_data):
+        return self.paginator.get_paginated_response(serialized_data)

@@ -6,9 +6,10 @@ from company.serializers import CompanySerializer
 from rest_framework.parsers import MultiPartParser
 from .helper import CompanyHelper
 from common.pagination import CustomPagination
+from rest_framework.pagination import PageNumberPagination
 
 
-class CompanyAPIView(APIView, CustomPagination):
+class CompanyAPIView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     parser_classes = (MultiPartParser, )
 
@@ -27,6 +28,8 @@ class CompanyAPIView(APIView, CustomPagination):
             serializer = CompanySerializer(data)
             return Response(GET_DATA_FROM_SERIALIZER(serializer))
         else:
-            data = company.get_all_companies()
-            serializer = CompanySerializer(data, many=True)
-            return self.get_paginated_response(serializer.data)
+            data_query = company.get_all_companies()
+            paginator = CustomPagination()
+            result_page = paginator.get_queryset(data=data_query, request=request)
+            serializer = CompanySerializer(result_page, many=True)
+            return paginator.get_response(serializer.data)
