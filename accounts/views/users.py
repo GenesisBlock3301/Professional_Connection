@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.serializers.users import ProfileSerializer, UserSerializer, CreateProfileSerializer
 import logging
-from accounts.responses import POST_ERROR_RESPONSE, POST_SUCCESS_RESPONSE, POST_EXCEPTION_ERROR_RESPONSE,\
+from common.responses import POST_ERROR_RESPONSE, POST_SUCCESS_RESPONSE, POST_EXCEPTION_ERROR_RESPONSE,\
     GET_DATA_FROM_SERIALIZER
 from accounts.models.users import Profile
 from accounts.helper import ProfileHelper

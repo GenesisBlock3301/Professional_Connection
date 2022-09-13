@@ -1,5 +1,6 @@
 from django.db import models
-from common.models import PostCommon, PostCommentCommon, PostLikeCommon, CommentLikeCommon
+from common.models import PostCommon, PostCommentCommon, PostLikeCommon, CommentLikeCommon,\
+    CommonUserField
 from accounts.models.users import User
 
 
@@ -14,6 +15,13 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CompanyFollower(CommonUserField):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="company_follower")
+
+    def __str__(self):
+        return f"company id {self.company_id}"
 
 
 class Management(models.Model):

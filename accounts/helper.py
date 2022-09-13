@@ -2,7 +2,7 @@ from accounts.models.users import Profile
 from django.db.models import Q
 from accounts.models.connection import Connection, Follower
 from rest_framework.response import Response
-from accounts.responses import ELEMENT_NOT_EXIST
+from common.responses import ELEMENT_NOT_EXIST
 from company.models import Company
 
 
