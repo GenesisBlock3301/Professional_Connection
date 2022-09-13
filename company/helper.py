@@ -7,7 +7,7 @@ class CompanyHelper:
 
     @staticmethod
     def get_all_companies():
-        companies = Company.objects.select_related("manager").all()
+        companies = Company.objects.select_related("manager").all().order_by("name")
         return companies
 
     @staticmethod
