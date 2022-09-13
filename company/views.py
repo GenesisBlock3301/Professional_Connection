@@ -6,7 +6,6 @@ from company.serializers import CompanySerializer
 from rest_framework.parsers import MultiPartParser
 from .helper import CompanyHelper
 from common.pagination import CustomPagination
-from rest_framework.pagination import PageNumberPagination
 
 
 class CompanyAPIView(APIView):
