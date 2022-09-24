@@ -1,11 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
+from rest_framework.parsers import MultiPartParser
+
 from common.responses import POST_SUCCESS_RESPONSE, POST_ERROR_RESPONSE, GET_DATA_FROM_SERIALIZER
 from company.serializers import CompanySerializer
-from rest_framework.parsers import MultiPartParser
-from .helper import CompanyHelper
 from common.pagination import CustomPagination
+from common.helper import HelperAdapter
+
+from .helper import CompanyHelper
 
 
 class CompanyAPIView(APIView):
@@ -21,13 +24,13 @@ class CompanyAPIView(APIView):
         return Response(POST_ERROR_RESPONSE)
 
     def get(self, request, pk=None):
-        company = CompanyHelper(request)
+        company = HelperAdapter(common_helper=CompanyHelper(request))
         if pk:
-            data = company.get_company(pk)
+            data = company.get_item(pk)
             serializer = CompanySerializer(data)
             return Response(GET_DATA_FROM_SERIALIZER(serializer))
         else:
-            data_query = company.get_all_companies()
+            data_query = company.all_items()
             paginator = CustomPagination()
             result_page = paginator.get_queryset(data=data_query, request=request)
             serializer = CompanySerializer(result_page, many=True)
