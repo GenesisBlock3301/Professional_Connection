@@ -8,6 +8,11 @@ from post.helper import PostHelper
 from post.serializers import PostSerializer, CreatePostSerializer
 
 
+class NewsFeed(APIView):
+    def get(self, request):
+        pass
+
+
 class PostApiView(APIView):
 
     def get(self, request, pk=None):
@@ -20,7 +25,7 @@ class PostApiView(APIView):
         else:
             is_my_post = request.query_params.get("is_mypost", None)
             if is_my_post == "True":
-                return posts.pagination(posts.my_items(request.user), PostSerializer)
+                return posts.pagination(posts.my_items(request.user_id), PostSerializer)
             else:
                 return posts.pagination(posts.all_items(), PostSerializer)
 
