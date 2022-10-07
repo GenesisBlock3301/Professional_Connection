@@ -11,3 +11,4 @@ class CustomPagination:
 
     def get_response(self, serialized_data):
         return self.paginator.get_paginated_response(serialized_data)
+

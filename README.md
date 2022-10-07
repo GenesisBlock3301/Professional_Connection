@@ -1,6 +1,13 @@
 # Professional_Connection
+## Prerequisite of this project for better work environment:
+* Pycharm 
+* Feel flexible with Pycharm Git
 
-## Load all initail data
+## Installing pip environment
+[Create Virtualenv in Pycharm][create-env-link]
+    
+
+## Load all initial data
 ```commandline
 python3 manage.py loaddata */fixtures/*.json
 ```
@@ -8,3 +15,5 @@ python3 manage.py loaddata */fixtures/*.json
 ```commandline
 python3 manage.py make_hash
 ```
+
+[create-env-link]: https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html
