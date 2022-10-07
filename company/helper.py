@@ -1,19 +1,18 @@
-from .models import Company
+from django.db.models import Count, Q
+from .models import Company, CompanyPost
 from common.helper import CommonIterableItem
 from common.pagination import CustomPagination
 
 
-class CompanyHelper(CommonIterableItem):
+class CompanyInfoHelper(CommonIterableItem):
     def __init__(self, request):
         self.request = request
 
     def all_items(self):
-        companies = Company.objects.select_related("manager").all().order_by("name")
-        return companies
+        return Company.objects.select_related("manager").all().order_by("name")
 
     def get_item(self, _id):
-        company = Company.objects.select_related("manager").filter(id=_id).first()
-        return company
+        return Company.objects.select_related("manager").filter(id=_id).first()
 
     def my_items(self, manager):
         return Company.objects.select_related("manager").filter(manager=manager)
@@ -24,5 +23,37 @@ class CompanyHelper(CommonIterableItem):
         serializer = serializer_class(result_page, many=True)
         return paginator.get_response(serializer.data)
 
-    # def get_common_items(self, posts, serializer_class):
-    #     return self.common_paginate(posts, serializer_class)
+
+class CompanyPostHelper(CommonIterableItem):
+
+    def __init__(self, request):
+        self.request = request
+        self.params = (
+            Q(user__isnull=False)
+        )
+
+    def get_item(self, _id):
+
+        return CompanyPost.objects.select_related("user", "company") \
+            .annotate(num_of_likes=Count("cpost_like", filter=self.params, distinct=True))\
+            .annotate(num_of_comments=Count("cpost_comment", filter=self.params, distinct=True))\
+            .filter(id=_id).first()
+
+    def my_items(self, user_id):
+        return CompanyPost.objects.select_related("user", "company") \
+            .annotate(num_of_likes=Count("cpost_like", filter=self.params, distinct=True)) \
+            .annotate(num_of_comments=Count("cpost_comment", filter=self.params, distinct=True)) \
+            .filter(user__id=user_id).order_by("-id")
+
+    def all_items(self):
+        return CompanyPost.objects.select_related("user", "company") \
+            .annotate(num_of_likes=Count("cpost_like", filter=self.params, distinct=True)) \
+            .annotate(num_of_comments=Count("cpost_comment", filter=self.params, distinct=True)) \
+            .all().order_by("-id")
+
+    def pagination(self, data, serializer_class):
+        paginator = CustomPagination()
+        result_page = paginator.get_queryset(data=data, request=self.request)
+        serializer = serializer_class(result_page, many=True)
+        return paginator.get_response(serializer.data)
+
