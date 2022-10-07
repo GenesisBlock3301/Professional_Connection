@@ -1,5 +1,20 @@
 from rest_framework import serializers
-from .models import GroupPost
+from .models import GroupPost, Group
+
+
+class GroupSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Group
+        fields = "__all__"
+
+
+class AllGroupSerializer(serializers.ModelSerializer):
+    num_of_members = serializers.IntegerField(required=True)
+
+    class Meta:
+        model = Group
+        fields = ("group_type", "group_name", "num_of_members")
 
 
 class CreateGroupPostSerializer(serializers.ModelSerializer):
