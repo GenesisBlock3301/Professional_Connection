@@ -14,7 +14,7 @@ class Group(Common):
     location = models.CharField(max_length=255, null=True)
     group_roles = models.TextField(null=True)
     is_public = models.BooleanField(default=True, help_text="group will visible to others user.")
-    allow_connection = models.BooleanField(default=True, help_text="allow connection to general user")
+    allow_connection = models.BooleanField(default=True, help_text="allow connect to general user")
 
     def __str__(self):
         return self.group_name

@@ -1,10 +1,37 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
+from rest_framework.parsers import MultiPartParser
 from common.helper import HelperAdapter
-from .helper import GroupPostHelper
-from .serializers import GroupPostSerializer, CreateGroupPostSerializer
+from .helper import GroupPostHelper, GroupHelper
+from .serializers import GroupPostSerializer, CreateGroupPostSerializer, AllGroupSerializer, GroupSerializer
 from common.responses import GET_DATA_FROM_SERIALIZER, POST_ERROR_RESPONSE, POST_SUCCESS_RESPONSE
+
+
+class GroupApiView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    parser_classes = (MultiPartParser,)
+
+    def post(self, request):
+        data = request.data
+        serializer = GroupSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(POST_SUCCESS_RESPONSE)
+        return Response(POST_ERROR_RESPONSE)
+
+    def get(self, request, pk=None):
+        groups = HelperAdapter(common_helper=GroupHelper(request=request))
+        if pk:
+            data = groups.get_item(pk)
+            serializer = GroupSerializer(data)
+            return Response(GET_DATA_FROM_SERIALIZER(serializer))
+        else:
+            is_my_post = request.query_params.get("is_my_post", None)
+            if is_my_post == "True":
+                return groups.pagination(groups.my_items(request.user.id), GroupSerializer)
+            else:
+                return groups.pagination(groups.all_items(), GroupSerializer)
 
 
 class GroupPostApiView(APIView):
