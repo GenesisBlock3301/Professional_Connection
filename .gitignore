@@ -111,6 +111,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Media file
+cover_image/
+group_photo/
+
 # Spyder project settings
 .spyderproject
 .spyproject
