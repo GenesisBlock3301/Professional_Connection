@@ -9,18 +9,20 @@ from company.models import Company
 class ProfileHelper:
     def __init__(self, request):
         self.request = request
+        self.profile = Profile.objects.select_related("user")
+        self.follower = Follower.objects.select_related("user", "follower")
+        self.connection = Connection.objects.select_related("user1", "user2")
 
     def get_profile_information(self):
-        profile = Profile.objects.select_related("user").filter(user=self.request.user).first()
+        profile = self.profile.filter(user=self.request.user).first()
         if not profile:
             return Response(ELEMENT_NOT_EXIST)
-        number_of_connections = Connection.objects.select_related("user1", "user2").filter(user1=self.request.user)\
-            .count()
-        number_of_followers = Follower.objects.select_related("user", "follower").filter(user=self.request.user).count()
+        number_of_connections = self.connection.filter(user1=self.request.user).count()
+        number_of_followers = self.follower.filter(user=self.request.user).count()
         params = (
                 Q(follower=self.request.user) &
                 Q(follower__isnull=False))
-        following = Follower.objects.select_related("user", "follower").filter(params).count()
+        following = self.follower.filter(params).count()
         company = Company.objects.select_related("manager").filter(manager=self.request.user).first()
 
         data = {

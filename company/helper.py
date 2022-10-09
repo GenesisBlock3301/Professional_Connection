@@ -7,15 +7,16 @@ from common.pagination import CustomPagination
 class CompanyInfoHelper(CommonIterableItem):
     def __init__(self, request):
         self.request = request
+        self.company = Company.objects.select_related("manager")
 
     def all_items(self):
-        return Company.objects.select_related("manager").all().order_by("name")
+        return self.company.all().order_by("name")
 
     def get_item(self, _id):
-        return Company.objects.select_related("manager").filter(id=_id).first()
+        return self.company.filter(id=_id).first()
 
     def my_items(self, manager):
-        return Company.objects.select_related("manager").filter(manager=manager)
+        return self.company.filter(manager=manager)
 
     def pagination(self, data, serializer_class):
         paginator = CustomPagination()
@@ -31,25 +32,18 @@ class CompanyPostHelper(CommonIterableItem):
         self.params = (
             Q(user__isnull=False)
         )
+        self.posts = CompanyPost.objects.select_related("user", "company") \
+            .annotate(num_of_likes=Count("cpost_like", filter=self.params, distinct=True)) \
+            .annotate(num_of_comments=Count("cpost_comment", filter=self.params, distinct=True))
 
     def get_item(self, _id):
-
-        return CompanyPost.objects.select_related("user", "company") \
-            .annotate(num_of_likes=Count("cpost_like", filter=self.params, distinct=True))\
-            .annotate(num_of_comments=Count("cpost_comment", filter=self.params, distinct=True))\
-            .filter(id=_id).first()
+        return self.posts.filter(id=_id).first()
 
     def my_items(self, user_id):
-        return CompanyPost.objects.select_related("user", "company") \
-            .annotate(num_of_likes=Count("cpost_like", filter=self.params, distinct=True)) \
-            .annotate(num_of_comments=Count("cpost_comment", filter=self.params, distinct=True)) \
-            .filter(user__id=user_id).order_by("-id")
+        return self.posts.filter(user__id=user_id).order_by("-id")
 
     def all_items(self):
-        return CompanyPost.objects.select_related("user", "company") \
-            .annotate(num_of_likes=Count("cpost_like", filter=self.params, distinct=True)) \
-            .annotate(num_of_comments=Count("cpost_comment", filter=self.params, distinct=True)) \
-            .all().order_by("-id")
+        return self.posts.all().order_by("-id")
 
     def pagination(self, data, serializer_class):
         paginator = CustomPagination()

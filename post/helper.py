@@ -11,28 +11,18 @@ class PostHelper(CommonIterableItem):
         self.params = (
             Q(user__isnull=False)
         )
+        self.posts = Post.objects.select_related("user", "company") \
+            .annotate(num_of_likes=Count("post_likes", filter=self.params, distinct=True)) \
+            .annotate(num_of_comments=Count("post_comments", filter=self.params, distinct=True))
 
     def get_item(self, _id):
-
-        post = Post.objects.select_related("user", "company") \
-            .annotate(num_of_likes=Count("post_likes", filter=self.params, distinct=True))\
-            .annotate(num_of_comments=Count("post_comments", filter=self.params, distinct=True))\
-            .filter(id=_id).first()
-        return post
+        return self.posts.filter(id=_id).first()
 
     def my_items(self, user_id):
-        posts = Post.objects.select_related("user", "company") \
-            .annotate(num_of_likes=Count("post_likes", filter=self.params, distinct=True)) \
-            .annotate(num_of_comments=Count("post_comments", filter=self.params, distinct=True)) \
-            .filter(user__id=user_id).order_by("-id")
-
-        return posts
+        return self.posts.filter(user__id=user_id).order_by("-id")
 
     def all_items(self):
-        return Post.objects.select_related("user", "company") \
-            .annotate(num_of_likes=Count("post_likes", filter=self.params, distinct=True)) \
-            .annotate(num_of_comments=Count("post_comments", filter=self.params, distinct=True)) \
-            .all().order_by("-id")
+        return self.posts.all().order_by("-id")
 
     def pagination(self, data, serializer_class):
         paginator = CustomPagination()
