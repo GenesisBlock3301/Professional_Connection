@@ -21,3 +21,14 @@ ELEMENT_NOT_EXIST = {
     "message": "Element doesn't exist.",
     "status": status.HTTP_204_NO_CONTENT
 }
+
+FRIEND_ACTION_RESPONSE = {
+    "sent_request": {"message": "Successfully send friend request"},
+    "sent_request_failed": {"message": "Request already sent waiting for further action."},
+    "request_critical_failed": {"message": "send request not working properly"},
+    "already_friend": {"message": "Both are already friend"},
+    "has_profile": {"message": "Before send request create profile"},
+    "accept_request": {"message": "Request accept successfully."},
+    "unauthorized_for_accept": {"message": "You are not authorized to accept this request"},
+    "delete_successfully": {"message": "friend deleted successfully."}
+}

@@ -37,6 +37,8 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    friends = models.ManyToManyField('User', blank=True, related_name="friend_list")
+    block_friends = models.ManyToManyField('User', blank=True, related_name="blocked_friend_list")
     """Custom user model"""
     email = models.EmailField(
         verbose_name='Email address',
