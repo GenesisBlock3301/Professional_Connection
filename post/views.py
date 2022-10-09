@@ -8,11 +8,6 @@ from post.helper import PostHelper
 from post.serializers import PostSerializer, CreatePostSerializer
 
 
-class NewsFeed(APIView):
-    def get(self, request):
-        pass
-
-
 class PostApiView(APIView):
 
     def get(self, request, pk=None):

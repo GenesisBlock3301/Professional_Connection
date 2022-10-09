@@ -5,9 +5,13 @@ from accounts.custom_managers import ConnectionManager
 
 
 class Connection(models.Model):
+    ACTION_TYPE = (
+        ("accepted", "Accepted"),
+        ("rejected", "Rejected"),
+    )
     user1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user1_connections")
     user2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user2_connections")
-
+    accepted_or_rejected = models.CharField(choices=ACTION_TYPE, max_length=20, blank=True)
     objects = ConnectionManager()
 
     def save(self, *args, **kwargs):
