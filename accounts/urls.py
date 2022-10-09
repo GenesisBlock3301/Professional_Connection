@@ -1,6 +1,6 @@
 from django.urls import path
-from accounts.views.users import SignupView, UserProfileView, LogoutView, ProfileApiView, send_friend_request,\
-    accept_friend_request, delete_friend_request_0r_already_friend
+from accounts.views.users import SignupView, UserProfileView, LogoutView, ProfileApiView, SendFriendRequest,\
+    AcceptFriendRequest, DeleteFriendRequestOrAlreadyFriend
 
 urlpatterns = [
     path("signup/", SignupView.as_view(), name="signup"),
@@ -9,5 +9,7 @@ urlpatterns = [
 ]+[
     path("profile/", ProfileApiView.as_view())
 ]+[
-    path("send_friend_request/", send_friend_request)
+    path("send_friend_request/<user_id>/", SendFriendRequest.as_view()),
+    path("accept_friend_request/<connection_id>/", AcceptFriendRequest.as_view()),
+    path("delete_friend/<connection_id>/", DeleteFriendRequestOrAlreadyFriend.as_view())
 ]

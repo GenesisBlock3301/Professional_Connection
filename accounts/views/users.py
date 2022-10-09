@@ -1,7 +1,6 @@
 import logging
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
@@ -11,7 +10,7 @@ from accounts.serializers.users import ProfileSerializer, UserSerializer, Create
 
 from common.responses import POST_ERROR_RESPONSE, POST_SUCCESS_RESPONSE, POST_EXCEPTION_ERROR_RESPONSE, \
     GET_DATA_FROM_SERIALIZER
-from accounts.models.users import Profile
+from accounts.models.users import Profile, Notification
 from accounts.helper import ProfileHelper
 from accounts.models.connection import Connection, Follower
 
@@ -94,55 +93,70 @@ class UserProfileView(APIView):
         return Response(serializer.data)
 
 
-@login_required
-def send_friend_request(request, user_id):
-    try:
-        from_user = request.user
-        to_user = User.objects.filter(id=user_id).first()
-        friend_request, created = Connection.objects.get_or_create(user1=from_user, user2=to_user)
-        if created:
-            follower = Follower.objects.create(user=to_user, follower=from_user)
-            follower.save()
-            return Response({"message": "Request send successfully."}, status=status.HTTP_200_OK)
+class SendFriendRequest(APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
 
-        if friend_request.accepted_or_rejected == "accepted":
-            return Response({"message": "you are already friend."}, status=status.HTTP_200_OK)
-        return Response({"message": "Request not send"}, status=status.HTTP_400_BAD_REQUEST)
-    except Exception as e:
-        logger.critical(str(e), exc_info=True)
-        return Response({"message": "send request not perform or you are already friend"},
-                        status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request, user_id):
+        try:
+            from_user = request.user
+            profile = Profile.objects.filter(user=from_user).first()
+            if not profile:
+                return Response({"message": "Before send request create profile"}, status=status.HTTP_200_OK)
+            to_user = User.objects.filter(id=user_id).first()
+            friend_request, created = Connection.objects.get_or_create(user1=from_user, user2=to_user)
+            if created:
+                Follower.objects.create(user=to_user, follower=from_user)
+                name = profile.first_name + " " + profile.last_name if profile else None
+                message = f"{name if name else from_user.id} send you friend request"
+                Notification.objects.create(user=to_user, message=message)
+                return Response({"message": "Request send successfully."}, status=status.HTTP_200_OK)
 
-
-@login_required
-def accept_friend_request(request, connection_id):
-    try:
-        params = Q(
-            Q(accepted_or_rejected=None) &
-            Q(id=connection_id)
-        )
-        friend_request = Connection.objects.filter(params).first()
-        if friend_request.user2 == request.user:
-            follower = Follower.objects.create(user=friend_request.user1, follower=request.user)
-            follower.save()
-            friend_request.accepted_or_rejected = "accepted"
-            friend_request.save()
-            return Response({"message": "Request accept successfully."}, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.critical(str(e), exc_info=True)
-        return Response({"message": "accept request not perform"}, status=status.HTTP_400_BAD_REQUEST)
+            if friend_request.accepted_or_rejected == "accepted":
+                return Response({"message": "you are already friend."}, status=status.HTTP_200_OK)
+            return Response({"message": "Request already sent waiting for further action."},
+                            status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.critical(str(e), exc_info=True)
+            return Response({"message": "send request not perform or you are already friend"},
+                            status=status.HTTP_400_BAD_REQUEST)
 
 
-@login_required
-def delete_friend_request_0r_already_friend(request, connection_id):
-    try:
+class AcceptFriendRequest(APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
 
-        friend = Connection.objects.filter(id=connection_id).first()
-        follower = Follower.objects.filter(Q(user=friend.user1, follower=friend.user2) | Q(user=friend.user2,
-                                                                                           follower=friend.user1))
-        follower.delete()
-        friend.delete()
-        return Response({"message": "friend deleted successfully."}, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.critical(str(e), exc_info=True)
-        return Response({"message": "delete request not perform"}, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request, connection_id):
+        try:
+            params = Q(
+                Q(accepted_or_rejected__exact='') &
+                Q(id=connection_id)
+            )
+            friend_request = Connection.objects.filter(params).first()
+            profile = Profile.objects.filter(user=friend_request.user2).first()
+            if not profile:
+                return Response({"message": "Accept request after create profile"}, status=status.HTTP_200_OK)
+            if friend_request.user2 == request.user:
+                Follower.objects.create(user=friend_request.user1, follower=request.user)
+                friend_request.accepted_or_rejected = "accepted"
+                friend_request.save()
+                name = profile.first_name + " " + profile.last_name if profile else None
+                message = f"{name if name else friend_request.user2_id} accept your friend request."
+                Notification.objects.create(user=friend_request.user1, message=message)
+                return Response({"message": "Request accept successfully."}, status=status.HTTP_200_OK)
+            return Response({"message": "You are not authorized to accept this request"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.critical(str(e), exc_info=True)
+            return Response({"message": "accept request not perform"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteFriendRequestOrAlreadyFriend(APIView):
+    def get(self, request, connection_id):
+        try:
+            friend = Connection.objects.filter(id=connection_id).first()
+            Follower.objects.filter(Q(user=friend.user1, follower=friend.user2) | Q(user=friend.user2,
+                                                                                    follower=friend.user1)).delete()
+            friend.delete()
+            return Response({"message": "friend deleted successfully."}, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.critical(str(e), exc_info=True)
+            return Response({"message": "delete request not perform"}, status=status.HTTP_400_BAD_REQUEST)

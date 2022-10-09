@@ -23,6 +23,13 @@ class Connection(models.Model):
         return f"{self.user1_id} and {self.user2_id}"
 
 
+class BlockList(models.Model):
+    friends = models.ManyToManyField(User)
+
+    def __str__(self):
+        return str(id)
+
+
 class Follower(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followings")
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followers")

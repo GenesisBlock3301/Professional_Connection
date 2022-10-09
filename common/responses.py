@@ -15,7 +15,6 @@ POST_EXCEPTION_ERROR_RESPONSE = {
     "status": status.HTTP_400_BAD_REQUEST
 }
 
-
 GET_DATA_FROM_SERIALIZER = lambda serializer: {"data": serializer.data, "status": status.HTTP_200_OK}
 
 ELEMENT_NOT_EXIST = {
