@@ -1,4 +1,4 @@
-from rest_framework import status, serializers
+from rest_framework import status
 
 POST_SUCCESS_RESPONSE = {
     "success": "Request success",
@@ -30,5 +30,7 @@ FRIEND_ACTION_RESPONSE = {
     "has_profile": {"message": "Before send request create profile"},
     "accept_request": {"message": "Request accept successfully."},
     "unauthorized_for_accept": {"message": "You are not authorized to accept this request"},
-    "delete_successfully": {"message": "friend deleted successfully."}
+    "delete_successfully": {"message": "friend deleted successfully."},
+    "block_failed": {"message": "blocked failed."},
+    "blocked": {"message": "blocked successfully."}
 }

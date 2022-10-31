@@ -7,7 +7,6 @@ from post.serializers import PostSerializer
 #     posts = PostSerializer()
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

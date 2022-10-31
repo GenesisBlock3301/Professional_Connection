@@ -1,9 +1,14 @@
-from accounts.models.users import Profile
-from django.db.models import Q
-from accounts.models.connection import Connection, Follower
+from django.db.models import Q, Count
 from rest_framework.response import Response
+from accounts.models.users import Profile
+from accounts.models.connection import Connection, Follower
+from common.pagination import CustomPagination
 from common.responses import ELEMENT_NOT_EXIST
+from common.helper import CommonIterableItem
 from company.models import Company
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class ProfileHelper:
@@ -47,3 +52,24 @@ class ProfileHelper:
             "website": self.request.data.get("website", "")
         }
         return data
+
+
+class FriendHelper(CommonIterableItem):
+    def __init__(self, request):
+        self.request = request
+        self.user = User.objects.prefetch_related("friends")
+
+    def get_item(self, friend_id):
+        pass
+
+    def my_items(self, user_id):
+        return self.user.get(id=user_id).friends.values("id", "email").order_by("-id")
+
+    def all_items(self):
+        pass
+
+    def pagination(self, data, serializer_class):
+        paginator = CustomPagination()
+        result_page = paginator.get_queryset(data=data, request=self.request)
+        serializer = serializer_class(result_page, many=True)
+        return paginator.get_response(serializer.data)
