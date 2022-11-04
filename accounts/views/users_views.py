@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class SignupView(APIView):
+    """ User registration view"""
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
@@ -35,6 +36,9 @@ class SignupView(APIView):
 
 
 class LogoutView(APIView):
+    """
+    Logout for logged user
+    """
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):

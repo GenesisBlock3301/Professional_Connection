@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from accounts.models.users import User
 from accounts.models.profile import Profile
-from accounts.serializers.user_serializers import UserSerializer, CompanySerializer
+from accounts.serializers.user_serializers import UserSerializer
+from company.serializers import CompanySerializer
 
 
 class CreateProfileSerializer(serializers.ModelSerializer):

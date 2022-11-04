@@ -1,5 +1,8 @@
 from rest_framework import status
 
+"""All dynamic response exist here...
+"""
+
 POST_SUCCESS_RESPONSE = {
     "success": "Request success",
     "status": status.HTTP_200_OK

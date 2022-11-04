@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class ProfileApiView(APIView):
+    """ User profile view"""
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
@@ -24,7 +25,7 @@ class ProfileApiView(APIView):
 
         try:
             profile = ProfileHelper(request)
-            data = profile.refectoring_post_data()
+            data = profile.refectoring_profile_post_data()
             serializer = CreateProfileSerializer(instance=instance, data=data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()

@@ -1,7 +1,7 @@
-from accounts.models.users import Profile, User
-from django.core.exceptions import ValidationError
+from accounts.models.profile import Profile
+from accounts.models.users import User
 from django.dispatch import receiver
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 
 
 @receiver(post_save, sender=User)
