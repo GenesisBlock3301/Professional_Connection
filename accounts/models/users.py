@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.utils.translation import gettext_lazy as _
 from datetime import date, timedelta
 
 
@@ -64,34 +63,3 @@ class User(AbstractBaseUser):
         return self.email
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profiles")
-    first_name = models.CharField(_("First Name"), max_length=255, null=True, blank=True)
-    last_name = models.CharField(_("Last Name"), max_length=255, null=True, blank=True)
-    image = models.ImageField(upload_to="user_photo", null=True, blank=True)
-    website = models.CharField(max_length=255, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-
-class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_notifications")
-    message = models.TextField()
-    is_read = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.user_id} {self.message[:50]}.."
-
-
-class ContactInfo(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_contracts")
-    profile_link = models.CharField(max_length=1000, null=True)
-    website = models.CharField(max_length=255, null=True)
-    phone = models.CharField(max_length=16, null=True)
-    email = models.CharField(max_length=100, null=True)
-    birthdate = models.DateField(null=True, max_length=8)
-
-    def calculate_age(self):
-        return (date.today() - self.birthdate) // timedelta(days=365.2425)

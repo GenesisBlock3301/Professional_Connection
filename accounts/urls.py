@@ -1,6 +1,6 @@
 from django.urls import path
-from accounts.views.users import SignupView, UserProfileView, LogoutView, ProfileApiView
-from accounts.views.friends import SendFriendRequest, AcceptFriendRequest, DeleteFriendRequestOrAlreadyFriend,\
+from accounts.views.users_views import SignupView, UserProfileView, LogoutView, ProfileApiView
+from accounts.views.connection_views import SendFriendRequest, AcceptFriendRequest, DeleteFriendRequestOrAlreadyFriend,\
     FriendList, BlockedFriendList
 
 urlpatterns = [

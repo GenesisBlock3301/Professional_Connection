@@ -6,12 +6,14 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework import status
 
-from accounts.serializers.users import FriendListSerializer
+from accounts.models.follower import Follower
+from accounts.models.notification import Notification
+from accounts.models.profile import Profile
+from accounts.serializers.user_serializers import FriendListSerializer
 from common.helper import HelperAdapter
-from accounts.helper import FriendHelper
+from accounts.helpers.profile_helpers import FriendHelper
 from common.responses import FRIEND_ACTION_RESPONSE, GET_DATA_FROM_SERIALIZER
-from accounts.models.users import Profile, Notification
-from accounts.models.connection import Connection, Follower
+from accounts.models.connection import Connection
 
 
 User = get_user_model()
