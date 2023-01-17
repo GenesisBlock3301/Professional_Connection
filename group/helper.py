@@ -7,17 +7,16 @@ from common.helper import CommonIterableItem
 class GroupHelper(CommonIterableItem):
     def __init__(self, request):
         self.request = request
+        self.posts = Group.objects.annotate(num_of_members=Count("group_members"))
 
     def get_item(self, _id):
-        return Group.objects.annotate(num_of_members=Count("group_members")).filter(id=_id).first()
+        return self.posts.filter(id=_id).first()
 
     def my_items(self, user_id):
-        return Group.objects.annotate(num_of_members=Count("group_members"))\
-            .filter(group_members__user_id=user_id).order_by("-id")
+        return self.posts.filter(group_members__user_id=user_id).order_by("-id")
 
     def all_items(self):
-        return Group.objects.annotate(num_of_members=Count("group_members")).order_by("-id")\
-            .values("group_type", "group_name", "num_of_members")
+        return self.posts.order_by("-id").values("group_type", "group_name", "num_of_members")
 
     def pagination(self, data, serializer_class):
         paginator = CustomPagination()

@@ -18,13 +18,13 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Connection)
-class UserAdmin(admin.ModelAdmin):
-    list_display = (
-        "user1", "user2"
-    )
-
-
-@admin.register(Featured)
-class UserAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(Connection)
+# class UserAdmin(admin.ModelAdmin):
+#     list_display = (
+#         "user1", "user2"
+#     )
+#
+#
+# @admin.register(Featured)
+# class UserAdmin(admin.ModelAdmin):
+#     pass

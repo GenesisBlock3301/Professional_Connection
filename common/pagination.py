@@ -2,6 +2,7 @@ from rest_framework.pagination import PageNumberPagination
 
 
 class CustomPagination:
+    """Custom pagination class"""
     def __init__(self):
         self.paginator = PageNumberPagination()
 
