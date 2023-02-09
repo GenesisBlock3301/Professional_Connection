@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "company",
     "post",
     "group",
+    'newsfeed'
 ]
 
 MIDDLEWARE = [
