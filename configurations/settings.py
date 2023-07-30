@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'drf_yasg',
     'rest_framework_simplejwt.token_blacklist',
     "common",
     'accounts',
@@ -47,6 +48,12 @@ INSTALLED_APPS = [
     "group",
     'newsfeed'
 ]
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'Professional_Connection.urls.swagger_info',  # Replace 'your_project' with your actual project name
+    # Other settings can be added here, like authentication settings, permissions, etc.
+}
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

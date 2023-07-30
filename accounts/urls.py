@@ -1,5 +1,6 @@
 from django.urls import path
-from accounts.views.users_views import SignupView, UserProfileView, LogoutView, ProfileApiView
+from accounts.views.users_views import SignupView, LogoutView
+from accounts.views.profile_views import UserProfileView, ProfileApiView
 from accounts.views.connection_views import SendFriendRequest, AcceptFriendRequest, DeleteFriendRequestOrAlreadyFriend,\
     FriendList, BlockedFriendList
 
